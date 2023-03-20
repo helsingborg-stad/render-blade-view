@@ -3,6 +3,10 @@
     "description": "Functionality for rendering Blade components.",
     "type": "library",
     "license": "MIT",
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test:coverage": "vendor/bin/phpunit --coverage-html .coverage --coverage-clover .coverage"
+    },
     "autoload": {
         "psr-4": {
             "HelsingborgStad\\RenderBladeView\\": "src/"

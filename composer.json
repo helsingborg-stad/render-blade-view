@@ -1,0 +1,18 @@
+{
+    "name": "helsingborg-stad/render-blade-view",
+    "description": "Functionality for rendering Blade components.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "HelsingborgStad\\RenderBladeView\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Thor Brink",
+            "email": "thor.brink@helsingborg.se"
+        }
+    ],
+    "require": {}
+}

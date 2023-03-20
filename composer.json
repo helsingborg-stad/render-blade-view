@@ -14,5 +14,7 @@
             "email": "thor.brink@helsingborg.se"
         }
     ],
-    "require": {}
+    "require-dev": {
+        "phpunit/phpunit": "^10.0"
+    }
 }

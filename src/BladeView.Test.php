@@ -3,23 +3,32 @@
 namespace HelsingborgStad\RenderBladeView\Test;
 
 use HelsingborgStad\RenderBladeView\BladeView;
-use HelsingborgStad\RenderBladeView\InitInterface;
+use ComponentLibrary\Init as ComponentLibraryInit;
 
 class RenderTest extends \PHPUnit\Framework\TestCase
 {
     protected $mockInitClass = null;
 
+    /**
+     * @group unit
+     */
     public function testClassIsDefined()
     {
         $this->assertTrue(class_exists(BladeView::class));
     }
 
+    /**
+     * @group unit
+     */
     public function testCreateReturnsInstance()
     {
-        $bladeView = BladeView::create(['foo'], $this->getMockInitClass());
+        $bladeView = BladeView::create(['foo'], ComponentLibraryInit::class);
         $this->assertInstanceOf(BladeView::class, $bladeView);
     }
 
+    /**
+     * @group unit
+     */
     public function testCreateRequiresViewPaths()
     {
         // Implement InitInterface in mock class
@@ -27,40 +36,31 @@ class RenderTest extends \PHPUnit\Framework\TestCase
         BladeView::create([], 'foo');
     }
 
+    /**
+     * @group unit
+     */
     public function testCreateRequiresInitClass()
     {
         $this->expectException(\Exception::class);
         BladeView::create(['foo'], '');
     }
 
-    public function testCreateRequiresInitClassThatImplementsInitInterface()
-    {
-        $this->expectException(\Exception::class);
-        BladeView::create(['foo'], 'foo');
-    }
-
-    public function testRenderReturnsString()
-    {
-        $bladeView = BladeView::create(['foo'], $this->getMockInitClass());
-        $this->assertIsString($bladeView->render('foo', []));
-    }
-
+    /**
+     * @group unit
+     */
     public function testRenderThrowsIfViewEmpty()
     {
         $this->expectException(\Exception::class);
-        $bladeView = BladeView::create(['foo'], $this->getMockInitClass());
+        $bladeView = BladeView::create(['foo'], ComponentLibraryInit::class);
         $bladeView->render('', []);
     }
 
-    public function testRenderDoesNotRequireData()
+    /**
+     * @group unit
+     */
+    public function testRenderReturnsMarkup()
     {
-        $bladeView = BladeView::create(['foo'], $this->getMockInitClass());
-        $this->assertIsString($bladeView->render('foo'));
-    }
-
-    private function getMockInitClass(): string
-    {
-        $mock = $this->createMock(InitInterface::class);
-        return $mock::class;
+        $bladeView = BladeView::create([__DIR__ . '/../test/views'], ComponentLibraryInit::class);
+        $this->assertEquals('Hello, bar.', $bladeView->render('foo', ['name' => 'bar']));
     }
 }

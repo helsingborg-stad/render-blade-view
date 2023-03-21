@@ -2,10 +2,11 @@
 
 namespace HelsingborgStad\RenderBladeView;
 
+use ReflectionClass;
+
 class BladeView
 {
-    private InitInterface $initInstance;
-    private BladeEngineInterface $bladeEngine;
+    private \ComponentLibrary\Init $initInstance;
     private array $viewPaths;
 
     /**
@@ -18,7 +19,6 @@ class BladeView
     {
         $this->viewPaths = $viewPaths;
         $this->setInitInstance($initClass);
-        $this->bladeEngine = $this->initInstance->getEngine();
     }
 
     /**
@@ -52,18 +52,7 @@ class BladeView
      */
     private function setInitInstance(string $initClass)
     {
-
-        try {
-            $implements = class_implements($initClass);
-
-            if ($implements === false || !in_array(InitInterface::class, $implements)) {
-                throw new \Exception();
-            }
-        } catch (\Throwable $th) {
-            throw new \Exception('Init class must implement InitInterface');
-        }
-
-        $this->initInstance = new $initClass($this->viewPaths);
+        $this->initInstance = (new ReflectionClass($initClass))->newInstance($this->viewPaths);
     }
 
     /**
@@ -80,7 +69,9 @@ class BladeView
             throw new \Exception('No view registered');
         }
 
-        return $this->bladeEngine->make(
+        $bladeEngine = $this->initInstance->getEngine();
+
+        return $bladeEngine->make(
             $view,
             array_merge(
                 $data,

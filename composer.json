@@ -15,11 +15,6 @@
             "HelsingborgStad\\RenderBladeView\\": "src/"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "ComponentLibrary\\": "vendor/helsingborg-stad/component-library/src/php/"
-        }
-    },
     "authors": [
         {
             "name": "Thor Brink",

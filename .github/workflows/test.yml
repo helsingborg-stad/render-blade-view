@@ -30,17 +30,29 @@ jobs:
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
 
-    - name: Cache Composer packages
-      id: composer-cache
-      uses: actions/cache@v3
-      with:
-        path: vendor
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php-
+    # - name: Cache Composer packages
+    #   id: composer-cache
+    #   uses: actions/cache@v3
+    #   with:
+    #     path: vendor
+    #     key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+    #     restore-keys: |
+    #       ${{ runner.os }}-php-
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
+
+    - name: List files
+      run: ls -al || true
+
+    - name: Check for packages
+      run: ls -al vendor || true
+
+    - name: Check for package
+      run: ls -al vendor/helsingborg-stad || true
+
+    - name: Check package content
+      run: ls -al vendor/helsingborg-stad/component-library || true
       
     - name: Lint
       run: composer run lint

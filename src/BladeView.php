@@ -2,8 +2,6 @@
 
 namespace HelsingborgStad\RenderBladeView;
 
-use ReflectionClass;
-
 class BladeView
 {
     private \ComponentLibrary\Init $initInstance;
@@ -52,7 +50,7 @@ class BladeView
      */
     private function setInitInstance(string $initClass)
     {
-        $this->initInstance = (new ReflectionClass($initClass))->newInstance($this->viewPaths);
+        $this->initInstance = new $initClass($this->viewPaths);
     }
 
     /**
@@ -69,14 +67,10 @@ class BladeView
             throw new \Exception('No view registered');
         }
 
-        $bladeEngine = $this->initInstance->getEngine();
+        $data['errorMessage'] = false;
+        $bladeEngine          = $this->initInstance->getEngine();
+        $markup               = $bladeEngine->make($view, $data)->render();
 
-        return $bladeEngine->make(
-            $view,
-            array_merge(
-                $data,
-                array('errorMessage' => false)
-            )
-        )->render();
+        return $markup;
     }
 }

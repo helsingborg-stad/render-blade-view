@@ -1,0 +1,33 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "test",
+            "group": "test",
+            "type": "shell",
+            "command": "composer run test",
+            "problemMatcher": []
+        },
+        {
+            "label": "test:coverage",
+            "group": "test",
+            "type": "shell",
+            "command": "composer run test:coverage",
+            "problemMatcher": []
+        },
+        {
+            "label": "lint",
+            "type": "shell",
+            "command": "composer run lint",
+            "problemMatcher": []
+        },
+        {
+            "label": "lint:fix",
+            "type": "shell",
+            "command": "composer run lint:fix",
+            "problemMatcher": []
+        }
+    ]
+}

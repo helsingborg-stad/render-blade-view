@@ -26,11 +26,9 @@
             "email": "thor.brink@helsingborg.se"
         }
     ],
-    "require": {
-        "helsingborg-stad/component-library": "dev-master"
-    },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.7",
-        "phpunit/phpunit": "9.6"
+        "phpunit/phpunit": "9.6",
+        "helsingborg-stad/component-library": "dev-master"
     }
 }

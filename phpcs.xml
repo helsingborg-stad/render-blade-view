@@ -4,5 +4,6 @@
 
     <file>src</file>
     <rule ref="PSR12"/>
+    <rule ref="Generic.Formatting.MultipleStatementAlignment"/>
 
 </ruleset>

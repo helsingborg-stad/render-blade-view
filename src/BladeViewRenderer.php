@@ -2,8 +2,6 @@
 
 namespace HelsingborgStad\RenderBladeView;
 
-use ReflectionClass;
-
 class BladeViewRenderer
 {
     private $bladeEngine;

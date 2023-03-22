@@ -18,11 +18,12 @@
 				"Gruntfuggly.triggertaskonsave"
 			],
 			"settings": {
-				"intelephense.environment.phpVersion": "8.2",
+				"intelephense.environment.phpVersion": "7.4",
 				"phpcs.executablePath": "vendor/bin/phpcs",
 				"triggerTaskOnSave.tasks": {
 					"lint:fix": [
-						"src/*.php"
+						"src/*.php",
+						"./*.php"
 					],
 					"test": [
 						"src/*.php"

@@ -1,0 +1,24 @@
+on: workflow_dispatch
+  # push:
+  #   branches:
+  #     - master
+name: Test
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+      - name: Git Version
+        id: version
+        uses: codacy/git-version@2.7.1
+      - uses: ncipollo/release-action@v1
+        with:
+          generateReleaseNotes: true
+          tag: ${{ steps.version.outputs.version }}

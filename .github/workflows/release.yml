@@ -2,7 +2,7 @@ on: workflow_dispatch
   # push:
   #   branches:
   #     - master
-name: Test
+name: Set tag and release
 
 jobs:
   build:

@@ -1,8 +1,11 @@
-  push:
-    branches:
-      - master
-
 name: Set tag and release
+
+on:
+  workflow_run:
+    workflows: ["Run Tests"]
+    branches: [master]
+    types: 
+      - completed
 
 jobs:
   build:
